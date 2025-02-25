@@ -4,7 +4,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddOpenApi(); 
+//builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ImmobileAppDbContext>(options => options.UseNpgsql(@"Host=localhost:5432;Username=docker;Password=docker;Database=immobileAppDB"));
+
 
 var app = builder.Build();
 

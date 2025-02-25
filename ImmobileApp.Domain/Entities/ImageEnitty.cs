@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection.Metadata;
 
 namespace ImmobileApp.Domain.Entities
 {
-    public class ImagesEnitty
+    public class ImageEnitty
     {
 
         private Guid Id { get; set; } = new Guid();
@@ -15,6 +10,7 @@ namespace ImmobileApp.Domain.Entities
         private Blob Image { get; set; }
         private float Size { get; set; }
         private string Name { get; set; } = string.Empty;
-private Guid ImmobileId { get; set; }
+        private Guid ImmobileId { get; set; }
+
     }
 }
