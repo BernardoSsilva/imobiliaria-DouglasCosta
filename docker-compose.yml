@@ -1,0 +1,17 @@
+
+services:
+  db:
+    build: .
+    container_name: immobileAppDB
+    image: postgres:latest
+    volumes:
+      - immobileAppDB:/var/lib/postgresql
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=immobileAppDB
+    ports:
+      - '5436:5432'
+
+volumes:
+  immobileAppDB:

@@ -2,7 +2,7 @@
 {
     public class PaginationParams
     {
-        private int Page { get; set; }
-        private int PerPage { get; set; }
+        public int Page { get; set; }
+        public int PerPage { get; set; }
     }
 }

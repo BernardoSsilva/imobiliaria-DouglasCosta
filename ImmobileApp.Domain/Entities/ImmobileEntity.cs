@@ -4,34 +4,36 @@ namespace ImmobileApp.Domain.Entities
 {
     public class ImmobileEntity
     {
-        private Guid Id { get; set; } = new Guid();
-        private string LocalityInfo { get; set; } = string.Empty;
-        private ImmobileTypeEnum ImmobileType { get; set; } = ImmobileTypeEnum.LAND;
+        public Guid Id { get; set; } = new Guid();
+        public string LocalityInfo { get; set; } = string.Empty;
+        public ImmobileTypeEnum ImmobileType { get; set; } = ImmobileTypeEnum.LAND;
 
-        private string? LocalLink { get; set; } = string.Empty;
+        public string? LocalLink { get; set; } = string.Empty;
 
-        private ImomobileStatusEnum Status { get; set; } = ImomobileStatusEnum.INANALYSIS;
+        public ImomobileStatusEnum Status { get; set; } = ImomobileStatusEnum.INANALYSIS;
 
-        private Guid UserCreationId { get; set; }
-        
-        private DateTime CreationDate { get; set; } = DateTime.UtcNow;
+        public Guid UserCreationId { get; set; }
 
-        private DateTime? UpdateDate { get; set; }
+        public DateTime CreationDate { get; set; } = DateTime.UtcNow;
 
-        private string PostalCode { get; set; } = string.Empty;
+        public DateTime? UpdateDate { get; set; }
 
-        private string State { get; set; } = string.Empty;
+        public string PostalCode { get; set; } = string.Empty;
 
-        private string City { get; set; } = string.Empty;
+        public string State { get; set; } = string.Empty;
 
-        private string Street { get; set; } = string.Empty;
+        public string City { get; set; } = string.Empty;
 
-        private string Neighborhood { get; set; } = string.Empty;
+        public string Street { get; set; } = string.Empty;
 
-        private bool HasScripture { get; set; } = false;
+        public string Neighborhood { get; set; } = string.Empty;
 
-        private string? ImmobileDescription { get; set; }
+        public bool HasScripture { get; set; } = false;
 
+        public string? ImmobileDescription { get; set; }
+
+        public UserEntity User { get; set; } = null!;
+        public ICollection<ImageEnitty> Images { get; } = new List<ImageEnitty>();
         
     }
 }

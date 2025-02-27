@@ -5,17 +5,17 @@ namespace ImmobileApp.Domain.Repositories
 {
     public interface IUserRepository
     {
-        void CreateNewUser(UserEntity data);
+        Task CreateNewUser(UserEntity data);
 
         Task<List<UserEntity>> ListAllUsers(PaginationParams pagination);
 
-        Task<UserEntity> GetUserById(Guid id);
+        Task<UserEntity?> GetUserById(Guid id);
 
-        Task<UserEntity> GetUserByEmail(string userEmail);
+        Task<UserEntity?> GetUserByEmail(string userEmail);
 
-        void UpdateUser(UserEntity data);
+        Task UpdateUser(UserEntity data);
 
-        Task<UserEntity> DeleteUser(UserEntity data);
+        Task DeleteUser(UserEntity data);
         
     }
 }

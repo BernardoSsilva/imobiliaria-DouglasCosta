@@ -4,12 +4,13 @@ namespace ImmobileApp.Domain.Entities
 {
     public class UserEntity
     {
-        private Guid Id { get; set; } = new Guid();
-        private string UserName { get; set; } = string.Empty;
-        private string UserEmail { get; set; } = string.Empty;
-        private string Password { get; set; } = string.Empty;
-        private RoleEnum Role { get; set; } = RoleEnum.OPERATOR;
-        
+        public Guid Id { get; set; } = new Guid();
+        public string UserName { get; set; } = string.Empty;
+        public string UserEmail { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public RoleEnum Role { get; set; } = RoleEnum.OPERATOR;
+
+        public ICollection<ImmobileEntity> Immobiles { get; } = new List<ImmobileEntity>();
 
     }
 }

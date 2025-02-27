@@ -5,12 +5,14 @@ namespace ImmobileApp.Domain.Entities
     public class ImageEnitty
     {
 
-        private Guid Id { get; set; } = new Guid();
-        private string Type { get; set; } = string.Empty;
-        private Blob Image { get; set; }
-        private float Size { get; set; }
-        private string Name { get; set; } = string.Empty;
-        private Guid ImmobileId { get; set; }
+        public Guid Id { get; set; } = new Guid();
+        public string Type { get; set; } = string.Empty;
+        public Byte Image { get; set; }
+        public float Size { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public Guid ImmobileId { get; set; }
+
+        public ImmobileEntity Immobile { get; set; } = null!;
 
     }
 }
