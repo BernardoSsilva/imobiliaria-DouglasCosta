@@ -1,4 +1,4 @@
-﻿using ImmobileApp.Comunication;
+﻿using ImmobileApp.Comunication.Requests;
 using ImmobileApp.Domain.Entities;
 using ImmobileApp.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;

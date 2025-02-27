@@ -1,4 +1,5 @@
-﻿using ImmobileApp.Domain.enums;
+﻿
+using ImmobileApp.Domain.enums;
 
 namespace ImmobileApp.Domain.Entities
 {

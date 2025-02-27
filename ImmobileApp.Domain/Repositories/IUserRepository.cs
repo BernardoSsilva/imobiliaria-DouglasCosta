@@ -1,4 +1,4 @@
-﻿using ImmobileApp.Comunication;
+﻿using ImmobileApp.Comunication.Requests;
 using ImmobileApp.Domain.Entities;
 
 namespace ImmobileApp.Domain.Repositories

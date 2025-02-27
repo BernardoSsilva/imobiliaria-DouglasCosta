@@ -12,9 +12,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.3.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="7.3.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ImmobileApp.Aplication\ImmobileApp.Aplication.csproj" />
+    <ProjectReference Include="..\ImmobileApp.Comunication\ImmobileApp.Comunication.csproj" />
     <ProjectReference Include="..\ImmobileApp.Infrastructure\ImmobileApp.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,4 @@
-﻿namespace ImmobileApp.Comunication
+﻿namespace ImmobileApp.Comunication.Requests
 {
     public class PaginationParams
     {
