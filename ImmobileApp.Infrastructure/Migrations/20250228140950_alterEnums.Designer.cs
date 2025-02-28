@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ImmobileApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ImmobileAppDbContext))]
-    [Migration("20250227121332_DataBaseFirstMigration")]
-    partial class DataBaseFirstMigration
+    [Migration("20250228140950_alterEnums")]
+    partial class alterEnums
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,8 +74,9 @@ namespace ImmobileApp.Infrastructure.Migrations
                     b.Property<string>("ImmobileDescription")
                         .HasColumnType("text");
 
-                    b.Property<int>("ImmobileType")
-                        .HasColumnType("integer");
+                    b.Property<string>("ImmobileType")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("LocalLink")
                         .HasColumnType("text");
@@ -96,8 +97,9 @@ namespace ImmobileApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("integer");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Street")
                         .IsRequired()
@@ -122,12 +124,27 @@ namespace ImmobileApp.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime>("BornDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CivilState")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("integer");
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("UserEmail")
                         .IsRequired()

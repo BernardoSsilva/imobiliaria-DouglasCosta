@@ -1,5 +1,5 @@
 ﻿
-namespace ImmobileApp.Domain.enums
+namespace ImmobileApp.Comunication.enums
 {
     public enum ImomobileStatusEnum
     {

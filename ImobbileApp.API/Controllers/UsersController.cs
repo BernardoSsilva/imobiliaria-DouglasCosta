@@ -1,15 +1,18 @@
-﻿using ImmobileApp.Aplication.UseCases.Users.Post.Interfaces;
+﻿using ImmobileApp.Aplication.UseCases.Users.Delete.Interfaces;
+using ImmobileApp.Aplication.UseCases.Users.Get.Interfaces;
+using ImmobileApp.Aplication.UseCases.Users.Post.Interfaces;
+using ImmobileApp.Aplication.UseCases.Users.Put.Interfaces;
 using ImmobileApp.Comunication.Errors;
 using ImmobileApp.Comunication.Requests;
+using ImmobileApp.Comunication.Responses.LongResponses;
+using ImmobileApp.Comunication.Responses.PaginatedResponses;
 using ImmobileApp.Comunication.Responses.ShortResponses;
 using ImmobileApp.Exception;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ImmobileApp.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -28,20 +31,90 @@ namespace ImmobileApp.API.Controllers
             }
             catch(ErrorOnValidationException e)
             {
-                return BadRequest(new ErrorOnValidationJson
-                {
-                    Messages = e.getErrorMessages(),
-                    StatusCode = e.getStatusCode()
-                });
+                return BadRequest(
+                 e.getErrorMessages()
+                 );
                
             }
             catch(ConflictException e)
             {
-                return Conflict(e.Message);
+                return Conflict(e.getErrorMessages());
             }
             catch
             {
                 return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(UserPaginatedResponseJson), StatusCodes.Status200OK)]
+        public async Task<IActionResult> FetchUsersWithPagination([FromServices] IListUsersWithPaginationUseCase useCase, [FromQuery] PaginationParams pagination)
+        {
+            var result = await useCase.execute(pagination);
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(UserLongResponseJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> FetchUserById([FromServices] IFindUserByIdUseCase useCase, Guid id)
+        {
+            try
+            {
+                var result = await useCase.execute(id);
+                return Ok(result);
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.getErrorMessages());
+            }
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateUser([FromServices] IUpdateUserUseCase useCase, [FromBody] UserRequestJson body, Guid id)
+        {
+            try
+            {
+                await useCase.execute(body, id);
+                return NoContent();
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.getErrorMessages());
+            }
+            catch (ConflictException e)
+            {
+                return Conflict(e.getErrorMessages());
+            }
+            catch(ErrorOnValidationException e)
+            {
+                return BadRequest(
+                    e.getErrorMessages()  
+                );
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteUser([FromServices] IDeleteUserUseCase useCase, Guid id)
+        {
+            try
+            {
+                await useCase.execute(id);
+                return NoContent();
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.getErrorMessages());
             }
         }
     }

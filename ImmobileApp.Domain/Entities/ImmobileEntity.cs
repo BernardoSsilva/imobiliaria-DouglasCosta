@@ -1,4 +1,4 @@
-﻿using ImmobileApp.Domain.enums;
+﻿using ImmobileApp.Comunication.enums;
 
 namespace ImmobileApp.Domain.Entities
 {
@@ -6,11 +6,11 @@ namespace ImmobileApp.Domain.Entities
     {
         public Guid Id { get; set; } = new Guid();
         public string LocalityInfo { get; set; } = string.Empty;
-        public ImmobileTypeEnum ImmobileType { get; set; } = ImmobileTypeEnum.LAND;
+        public string ImmobileType { get; set; } = ImmobileTypeEnum.LAND.ToString();
 
         public string? LocalLink { get; set; } = string.Empty;
 
-        public ImomobileStatusEnum Status { get; set; } = ImomobileStatusEnum.INANALYSIS;
+        public string Status { get; set; } = ImomobileStatusEnum.INANALYSIS.ToString();
 
         public Guid UserCreationId { get; set; }
 

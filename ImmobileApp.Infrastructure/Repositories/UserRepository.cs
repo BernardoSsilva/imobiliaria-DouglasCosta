@@ -32,12 +32,20 @@ namespace ImmobileApp.Infrastructure.Repositories
         public async Task<UserEntity?> GetUserByEmail(string userEmail)
         {
             var user = await _dbContext.Users.FirstOrDefaultAsync(user => user.UserEmail == userEmail);
+            if(user is null)
+            {
+                return null;
+            }
             return user;
         }
 
         public async Task<UserEntity?> GetUserById(Guid id)
         {
             var user = await _dbContext.Users.FirstOrDefaultAsync(user => user.Id == id);
+            if (user is null)
+            {
+                return null;
+            }
             return user;
         }
 

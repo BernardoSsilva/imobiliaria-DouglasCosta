@@ -2,16 +2,15 @@
 
 namespace ImmobileApp.Exception
 {
-    public class ConflictException : ImmobileAppException
+    public class NotFoundException : ImmobileAppException
     {
-        private readonly string _message ;
+        private readonly string _message;
 
-
-        public ConflictException():base(string.Empty)
+        public NotFoundException():base(string.Empty)
         {
-            _message = "Conflict on creation";
+            _message = "Not Found";
         }
-        
+      
         public override List<string> getErrorMessages()
         {
             return [_message];
@@ -19,7 +18,7 @@ namespace ImmobileApp.Exception
 
         public override HttpStatusCode getStatusCode()
         {
-            return HttpStatusCode.Conflict;
+            return HttpStatusCode.NotFound;
         }
     }
 }

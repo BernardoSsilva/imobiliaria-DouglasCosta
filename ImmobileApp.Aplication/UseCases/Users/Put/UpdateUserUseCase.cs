@@ -1,0 +1,63 @@
+﻿using AutoMapper;
+using ImmobileApp.Aplication.UseCases.Users.Put.Interfaces;
+using ImmobileApp.Aplication.Validators;
+using ImmobileApp.Comunication.Requests;
+using ImmobileApp.Domain.Repositories;
+using ImmobileApp.Exception;
+
+
+namespace ImmobileApp.Aplication.UseCases.Users.Put
+{
+    public class UpdateUserUseCase : IUpdateUserUseCase
+    {
+        private readonly IUserRepository _repository;
+        private readonly IMapper _mapper;
+        public UpdateUserUseCase(IUserRepository repository, IMapper mapper )
+        {
+            _repository = repository;
+            _mapper = mapper;
+        }
+        public async Task execute(UserRequestJson body, Guid userId)
+        {
+            var user = await _repository.GetUserById(userId);
+
+            if (user is null) throw new NotFoundException();
+
+
+            var userWithEmail = await _repository.GetUserByEmail(body.UserEmail);
+
+            if (userWithEmail is not null) throw new ConflictException();
+                    
+            try
+            {
+                var newEntity = _mapper.Map(body, user);
+
+                var parsedRequest = _mapper.Map<UserRequestJson>(newEntity);
+
+                Validate(parsedRequest);
+
+                var encriptedPassword = BCrypt.Net.BCrypt.HashPassword(body.Password);
+
+
+                newEntity.Password = encriptedPassword;
+
+
+                await _repository.UpdateUser(newEntity);
+            }
+            catch
+            {
+                throw new System.Exception("Unknown Error");
+            }
+        }
+
+        private void Validate(UserRequestJson request) {
+            var validator = new UserValidator();
+            var result = validator.Validate(request);
+            if (!result.IsValid)
+            {
+                var errorMessages = result.Errors.Select(e => e.ErrorMessage).ToList();
+                throw new ErrorOnValidationException(errorMessages);
+            }
+        }
+    }
+}

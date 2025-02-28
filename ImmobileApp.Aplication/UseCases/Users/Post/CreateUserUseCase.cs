@@ -24,18 +24,19 @@ namespace ImmobileApp.Aplication.UseCases.Users.Post
        public async Task<UserShortResponseJson> execute(UserRequestJson data)
         {
 
+            Console.WriteLine(data);
            var encriptedPassword = BCrypt.Net.BCrypt.HashPassword(data.Password);
 
            Validate(data);
 
-            var userAlreadyExists = _repository.GetUserByEmail(data.UserEmail);
+            var userWithEmail = await _repository.GetUserByEmail(data.UserEmail);
 
-            if(userAlreadyExists != null)
+            if (userWithEmail is not null)
             {
-                throw new ConflictException("User email already registered");
+                throw new ConflictException();
             }
 
-           var entity = _mapper.Map<UserEntity>(data);
+            var entity = _mapper.Map<UserEntity>(data);
             entity.Password = encriptedPassword;
             await _repository.CreateNewUser(entity);
 
