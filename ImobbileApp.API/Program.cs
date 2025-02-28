@@ -1,8 +1,11 @@
 using ImmobileApp.Aplication;
-using ImmobileApp.Aplication.UseCases.Users.Post.Interfaces;
 using ImmobileApp.Infrastructure;
+using ImmobileApp.Security.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,9 +47,25 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+object value = builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = SecurityKey()
+        };
+    }
+    );
+
+
 builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ImmobileAppDbContext>(options => options.UseNpgsql(connectionString));
 builder.Services.AddInfrastructure();
 builder.Services.AddApplication();
+builder.Services.AddSingleton<TokenGenerator>();
 
 
 var app = builder.Build();
@@ -66,3 +85,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+SymmetricSecurityKey SecurityKey() => new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Secret"]));

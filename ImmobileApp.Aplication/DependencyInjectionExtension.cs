@@ -30,6 +30,7 @@ namespace ImmobileApp.Aplication
             service.AddScoped<IFindUserByIdUseCase, FindUserByIdUseCase>();
             service.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
             service.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
+            service.AddScoped<ILoginUseCase, LoginUseCase>();
         }
     }
 }

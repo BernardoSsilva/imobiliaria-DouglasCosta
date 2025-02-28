@@ -18,6 +18,7 @@
     <ProjectReference Include="..\ImmobileApp.Domain\ImmobileApp.Domain.csproj" />
     <ProjectReference Include="..\ImmobileApp.Exception\ImmobileApp.Exception.csproj" />
     <ProjectReference Include="..\ImmobileApp.Infrastructure\ImmobileApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\ImmobileApp.SECURITY\ImmobileApp.Security.csproj" />
   </ItemGroup>
 
 </Project>

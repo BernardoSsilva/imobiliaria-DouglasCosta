@@ -1,13 +1,16 @@
-﻿using ImmobileApp.Aplication.UseCases.Users.Delete.Interfaces;
+﻿using ImmobileApp.API.Service;
+using ImmobileApp.Aplication.UseCases.Users.Delete.Interfaces;
 using ImmobileApp.Aplication.UseCases.Users.Get.Interfaces;
 using ImmobileApp.Aplication.UseCases.Users.Post.Interfaces;
 using ImmobileApp.Aplication.UseCases.Users.Put.Interfaces;
 using ImmobileApp.Comunication.Errors;
 using ImmobileApp.Comunication.Requests;
+using ImmobileApp.Comunication.Responses;
 using ImmobileApp.Comunication.Responses.LongResponses;
 using ImmobileApp.Comunication.Responses.PaginatedResponses;
 using ImmobileApp.Comunication.Responses.ShortResponses;
 using ImmobileApp.Exception;
+using ImmobileApp.Security.Tokens;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ImmobileApp.API.Controllers
@@ -16,6 +19,14 @@ namespace ImmobileApp.API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+
+        private readonly TokenGenerator _tokenGenerator;
+
+        public UsersController(TokenGenerator tokenGenerator)
+        {
+            _tokenGenerator = tokenGenerator;
+        }
+
 
         [HttpPost]
         [ProducesResponseType(typeof(UserShortResponseJson) , StatusCodes.Status201Created)]
@@ -75,10 +86,17 @@ namespace ImmobileApp.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> UpdateUser([FromServices] IUpdateUserUseCase useCase, [FromBody] UserRequestJson body, Guid id)
         {
+            if (HttpContext.Request.Headers.Authorization.ToString().Length <= 0)
+            {
+                return Unauthorized();
+            }
             try
             {
+                var authenticationContext = new AuthenticationService(HttpContext);
+                Console.Write(authenticationContext.userId());
                 await useCase.execute(body, id);
                 return NoContent();
             }
@@ -105,8 +123,13 @@ namespace ImmobileApp.API.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> DeleteUser([FromServices] IDeleteUserUseCase useCase, Guid id)
         {
+            if (HttpContext.Request.Headers.Authorization.ToString() is null )
+            {
+                return Unauthorized();
+            }
             try
             {
                 await useCase.execute(id);
@@ -115,6 +138,28 @@ namespace ImmobileApp.API.Controllers
             catch (NotFoundException e)
             {
                 return NotFound(e.getErrorMessages());
+            }
+        }
+
+
+        [HttpPost("login")]
+        [ProducesResponseType(typeof(AuthenticationResponseJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> Login([FromServices] ILoginUseCase useCase, AuthenticationRequestJson request)
+        {
+            try
+            {
+                var result = await useCase.execute(request);
+                var token = _tokenGenerator.Generate(result);
+
+                return Ok(new AuthenticationResponseJson
+                {
+                    Token = token,
+                    User = result
+                });
+            } catch
+            {
+                return Unauthorized();
             }
         }
     }

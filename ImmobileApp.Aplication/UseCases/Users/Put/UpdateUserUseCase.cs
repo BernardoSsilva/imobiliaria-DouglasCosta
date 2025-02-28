@@ -2,6 +2,7 @@
 using ImmobileApp.Aplication.UseCases.Users.Put.Interfaces;
 using ImmobileApp.Aplication.Validators;
 using ImmobileApp.Comunication.Requests;
+using ImmobileApp.Domain.Entities;
 using ImmobileApp.Domain.Repositories;
 using ImmobileApp.Exception;
 
@@ -30,14 +31,22 @@ namespace ImmobileApp.Aplication.UseCases.Users.Put
                     
             try
             {
-                var newEntity = _mapper.Map(body, user);
+                var newEntity = new UserEntity
+                {
+                    Id = userId,
+                    UserEmail = body.UserEmail.Length > 0 ? body.UserEmail : user.UserEmail,
+                    BornDate = user.BornDate,
+                    CivilState = body.CivilState is null ? user.CivilState : body.CivilState.ToString(),
+                    Role = body.Role is null ? user.Role : body.Role.ToString(),
+                    Phone = body.Phone.Length > 0 ?  body.Phone : user.Phone,
+                    UserName = body.UserName.Length > 0 ? body.UserName : user.UserName,
+                }
 
-                var parsedRequest = _mapper.Map<UserRequestJson>(newEntity);
+                //var parsedRequest = _mapper.Map<UserRequestJson>(newEntity);
 
-                Validate(parsedRequest);
+                //Validate(parsedRequest);
 
                 var encriptedPassword = BCrypt.Net.BCrypt.HashPassword(body.Password);
-
 
                 newEntity.Password = encriptedPassword;
 
