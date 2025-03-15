@@ -23,7 +23,7 @@ namespace ImmobileApp.Aplication.UseCases.Users.Get
             return new UserPaginatedResponseJson
             {
                 Users = mappedUsers,
-               PaginationParams= paginationParams
+                PaginationParams = paginationParams
             };
         }
     }

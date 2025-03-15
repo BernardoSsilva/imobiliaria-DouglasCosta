@@ -6,7 +6,7 @@ using ImmobileApp.Domain.Entities;
 
 namespace ImmobileApp.Aplication
 {
-    public class AutoMapper:Profile
+    public class AutoMapper : Profile
     {
         public AutoMapper()
         {
@@ -18,11 +18,13 @@ namespace ImmobileApp.Aplication
         {
             CreateMap<UserEntity, UserShortResponseJson>();
             CreateMap<UserEntity, UserLongResponseJson>();
+            CreateMap<ImmobileEntity, ImmobileLongResponseJson>();
+            CreateMap<ImmobileEntity, ImmobileShortResponseJson>();
         }
         public void RequestToEntity()
         {
             CreateMap<UserRequestJson, UserEntity>();
-
+            CreateMap<ImmobileRequestJson, ImmobileEntity>();
 
         }
     }

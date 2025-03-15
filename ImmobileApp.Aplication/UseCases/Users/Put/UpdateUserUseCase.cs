@@ -13,7 +13,7 @@ namespace ImmobileApp.Aplication.UseCases.Users.Put
     {
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
-        public UpdateUserUseCase(IUserRepository repository, IMapper mapper )
+        public UpdateUserUseCase(IUserRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -28,7 +28,7 @@ namespace ImmobileApp.Aplication.UseCases.Users.Put
             var userWithEmail = await _repository.GetUserByEmail(body.UserEmail);
 
             if (userWithEmail is not null) throw new ConflictException();
-                    
+
             try
             {
                 var newEntity = new UserEntity
@@ -38,9 +38,9 @@ namespace ImmobileApp.Aplication.UseCases.Users.Put
                     BornDate = user.BornDate,
                     CivilState = body.CivilState is null ? user.CivilState : body.CivilState.ToString(),
                     Role = body.Role is null ? user.Role : body.Role.ToString(),
-                    Phone = body.Phone.Length > 0 ?  body.Phone : user.Phone,
+                    Phone = body.Phone.Length > 0 ? body.Phone : user.Phone,
                     UserName = body.UserName.Length > 0 ? body.UserName : user.UserName,
-                }
+                };
 
                 //var parsedRequest = _mapper.Map<UserRequestJson>(newEntity);
 
@@ -59,7 +59,8 @@ namespace ImmobileApp.Aplication.UseCases.Users.Put
             }
         }
 
-        private void Validate(UserRequestJson request) {
+        private void Validate(UserRequestJson request)
+        {
             var validator = new UserValidator();
             var result = validator.Validate(request);
             if (!result.IsValid)

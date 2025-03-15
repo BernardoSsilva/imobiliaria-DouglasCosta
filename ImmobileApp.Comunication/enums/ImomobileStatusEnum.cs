@@ -1,7 +1,7 @@
 ﻿
 namespace ImmobileApp.Comunication.enums
 {
-    public enum ImomobileStatusEnum
+    public enum ImmobileStatusEnum
     {
         ACTIVE,
         INACTIVE,

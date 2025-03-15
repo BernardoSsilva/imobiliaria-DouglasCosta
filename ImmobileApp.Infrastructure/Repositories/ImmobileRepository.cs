@@ -43,6 +43,11 @@ namespace ImmobileApp.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-      
+        public async Task<ImmobileEntity?> GetImmobileByPostalCode(string PostalCode)
+        {
+            return await _dbContext.Immobiles.FirstOrDefaultAsync(e => e.PostalCode == PostalCode);
+        }
+
+
     }
 }

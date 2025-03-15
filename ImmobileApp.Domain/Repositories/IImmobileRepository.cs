@@ -9,6 +9,7 @@ namespace ImmobileApp.Domain.Repositories
 
         Task<List<ImmobileEntity>> ListAllImmobiles(PaginationParams pagination);
         Task<ImmobileEntity?> GetImmobileById(Guid id);
+        Task<ImmobileEntity?> GetImmobileByPostalCode(string PostalCode);
 
         Task UpdateImmobile(ImmobileEntity data);
         Task DeleteImmobileAsync(ImmobileEntity data);

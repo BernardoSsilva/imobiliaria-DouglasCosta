@@ -10,7 +10,7 @@ namespace ImmobileApp.Domain.Entities
 
         public string? LocalLink { get; set; } = string.Empty;
 
-        public string Status { get; set; } = ImomobileStatusEnum.INANALYSIS.ToString();
+        public string Status { get; set; } = ImmobileStatusEnum.INANALYSIS.ToString();
 
         public Guid UserCreationId { get; set; }
 
@@ -34,6 +34,7 @@ namespace ImmobileApp.Domain.Entities
 
         public UserEntity User { get; set; } = null!;
         public ICollection<ImageEnitty> Images { get; } = new List<ImageEnitty>();
-        
+
+
     }
 }

@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ImmobileApp.Infrastructure
 {
-    public class ImmobileAppDbContext:DbContext
+    public class ImmobileAppDbContext : DbContext
     {
 
 
         public ImmobileAppDbContext(DbContextOptions<ImmobileAppDbContext> options) : base(options) { }
-        
+
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<ImmobileEntity> Immobiles { get; set; }
         public DbSet<ImageEnitty> Images { get; set; }
@@ -26,6 +26,7 @@ namespace ImmobileApp.Infrastructure
                 .WithOne(e => e.Immobile)
                 .HasForeignKey(e => e.ImmobileId)
                 .HasPrincipalKey(e => e.Id).IsRequired();
+
         }
     }
 }

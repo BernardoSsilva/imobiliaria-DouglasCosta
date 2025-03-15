@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using ImmobileApp.Comunication.enums;
 using ImmobileApp.Comunication.Requests;
 
 namespace ImmobileApp.Aplication.Validators

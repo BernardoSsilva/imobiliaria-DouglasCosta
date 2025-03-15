@@ -6,7 +6,7 @@ namespace ImmobileApp.Exception
     {
         private readonly string message;
 
-        public UnauthorizedException():base(string.Empty)
+        public UnauthorizedException() : base(string.Empty)
         {
             message = "Unauthorized";
         }

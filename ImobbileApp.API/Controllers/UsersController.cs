@@ -29,25 +29,26 @@ namespace ImmobileApp.API.Controllers
 
 
         [HttpPost]
-        [ProducesResponseType(typeof(UserShortResponseJson) , StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(UserShortResponseJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ErrorOnValidationJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
 
-        public async Task<IActionResult> CreateNewUser([FromServices] ICreateUserUseCase useCase, [FromBody] UserRequestJson body) {
+        public async Task<IActionResult> CreateNewUser([FromServices] ICreateUserUseCase useCase, [FromBody] UserRequestJson body)
+        {
             try
             {
                 var result = await useCase.execute(body);
                 return Created(string.Empty, result);
             }
-            catch(ErrorOnValidationException e)
+            catch (ErrorOnValidationException e)
             {
                 return BadRequest(
                  e.getErrorMessages()
                  );
-               
+
             }
-            catch(ConflictException e)
+            catch (ConflictException e)
             {
                 return Conflict(e.getErrorMessages());
             }
@@ -96,7 +97,6 @@ namespace ImmobileApp.API.Controllers
             try
             {
                 var authenticationContext = new AuthenticationService(HttpContext);
-                Console.Write(authenticationContext.userId());
                 await useCase.execute(body, id);
                 return NoContent();
             }
@@ -108,10 +108,10 @@ namespace ImmobileApp.API.Controllers
             {
                 return Conflict(e.getErrorMessages());
             }
-            catch(ErrorOnValidationException e)
+            catch (ErrorOnValidationException e)
             {
                 return BadRequest(
-                    e.getErrorMessages()  
+                    e.getErrorMessages()
                 );
             }
             catch
@@ -126,7 +126,7 @@ namespace ImmobileApp.API.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> DeleteUser([FromServices] IDeleteUserUseCase useCase, Guid id)
         {
-            if (HttpContext.Request.Headers.Authorization.ToString() is null )
+            if (HttpContext.Request.Headers.Authorization.ToString() is null)
             {
                 return Unauthorized();
             }
@@ -157,7 +157,8 @@ namespace ImmobileApp.API.Controllers
                     Token = token,
                     User = result
                 });
-            } catch
+            }
+            catch
             {
                 return Unauthorized();
             }
