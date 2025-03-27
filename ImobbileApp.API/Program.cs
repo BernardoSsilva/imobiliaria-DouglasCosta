@@ -10,12 +10,12 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString(builder.Environment.IsDevelopment() ? "Development" :"Production");
+var connectionString = builder.Configuration.GetConnectionString(builder.Environment.IsDevelopment() ? "Development" : "Production");
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi(); 
+builder.Services.AddOpenApi();
 
 builder.Services.AddSwaggerGen(options =>
 {
