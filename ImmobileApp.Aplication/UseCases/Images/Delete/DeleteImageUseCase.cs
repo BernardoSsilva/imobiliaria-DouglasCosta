@@ -21,7 +21,6 @@ namespace ImmobileApp.Aplication.UseCases.Images.Delete
 
         public async Task<bool> DeleteImage(Guid imageId, string cloudnaryUrl)
         {
-            // isso daqui não vai funcionar nem que me paguem
 
             Cloudinary cloudinary = new Cloudinary(cloudnaryUrl);
             cloudinary.Api.Secure = true;
