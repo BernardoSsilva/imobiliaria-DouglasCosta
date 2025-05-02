@@ -8,10 +8,7 @@ using ImmobileApp.Comunication.Responses.LongResponses;
 using ImmobileApp.Comunication.Responses.PaginatedResponses;
 using ImmobileApp.Comunication.Responses.ShortResponses;
 using ImmobileApp.Exception;
-using ImmobileApp.Security.Tokens;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 
 namespace ImmobileApp.API.Controllers
 {

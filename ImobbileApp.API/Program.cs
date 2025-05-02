@@ -1,3 +1,4 @@
+using dotenv.net;
 using ImmobileApp.Aplication;
 using ImmobileApp.Infrastructure;
 using ImmobileApp.Security.Tokens;
@@ -17,6 +18,7 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+DotEnv.Load();
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
