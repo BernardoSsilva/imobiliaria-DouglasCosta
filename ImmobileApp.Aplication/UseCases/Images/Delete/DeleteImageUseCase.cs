@@ -38,7 +38,7 @@ namespace ImmobileApp.Aplication.UseCases.Images.Delete
                 ResourceType = ResourceType.Image,
             };
 
-            var deleteResponse = await cloudinary.DestroyAsync(exclusionParams);
+            var deleteResponse =  cloudinary.Destroy(exclusionParams);
             await _repository.DeleteImage(imageToDelete);
 
             return true;

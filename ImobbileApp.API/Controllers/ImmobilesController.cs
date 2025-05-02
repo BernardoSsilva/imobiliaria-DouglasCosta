@@ -1,4 +1,5 @@
 using ImmobileApp.API.Service;
+using ImmobileApp.Aplication.UseCases.Images.Get.Interfaces;
 using ImmobileApp.Aplication.UseCases.Immobiles.Delete.Interface;
 using ImmobileApp.Aplication.UseCases.Immobiles.Get.Interfaces;
 using ImmobileApp.Aplication.UseCases.Immobiles.Post.Interfaces;
@@ -121,6 +122,21 @@ namespace ImmobileApp.API.Controllers
                 return Unauthorized(e.getErrorMessages());
             }
             catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("{immobileId}/Images")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> ListImmobileImages(Guid immobileId, [FromQuery] PaginationParams paginationParams, [FromServices] IListImagesByImmobileUseCase useCase)
+        {
+            try
+            {
+                var result = await useCase.Execute(paginationParams, immobileId);
+
+                return Ok(result);
+            }catch
             {
                 return BadRequest();
             }

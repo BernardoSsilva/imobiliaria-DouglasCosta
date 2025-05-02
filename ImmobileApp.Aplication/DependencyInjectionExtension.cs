@@ -1,5 +1,7 @@
 ﻿using ImmobileApp.Aplication.UseCases.Images.Delete;
 using ImmobileApp.Aplication.UseCases.Images.Delete.Interfaces;
+using ImmobileApp.Aplication.UseCases.Images.Get;
+using ImmobileApp.Aplication.UseCases.Images.Get.Interfaces;
 using ImmobileApp.Aplication.UseCases.Images.Post;
 using ImmobileApp.Aplication.UseCases.Images.Post.Interfaces;
 using ImmobileApp.Aplication.UseCases.Immobiles.Delete;
@@ -50,6 +52,7 @@ namespace ImmobileApp.Aplication
             service.AddScoped<IUpdateImmobileUseCase, UpdateImmobileUseCase>();
             service.AddScoped<ICreateImageUseCase, CreateImageUseCase>();
             service.AddScoped<IDeleteImageUseCase, DeleteImageUseCase>();
+            service.AddScoped<IListImagesByImmobileUseCase, ListImagesByImmobileUseCase>();
         }
     }
 }

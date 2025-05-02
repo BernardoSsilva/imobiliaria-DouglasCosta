@@ -20,11 +20,13 @@ namespace ImmobileApp.Aplication
             CreateMap<UserEntity, UserLongResponseJson>();
             CreateMap<ImmobileEntity, ImmobileLongResponseJson>();
             CreateMap<ImmobileEntity, ImmobileShortResponseJson>();
+            CreateMap<ImageEnitty, ImageShortResponseJson>();
         }
         public void RequestToEntity()
         {
             CreateMap<UserRequestJson, UserEntity>();
             CreateMap<ImmobileRequestJson, ImmobileEntity>();
+            CreateMap<ImageRequestJson, ImageEnitty>();
 
         }
     }
