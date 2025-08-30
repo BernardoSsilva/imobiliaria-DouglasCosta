@@ -10,7 +10,6 @@ namespace ImmobileApp.Comunication.Responses.LongResponses
         public string Role { get; set; } =string.Empty;
         public string Phone { get; set; } = string.Empty;
         public DateTime BornDate { get; set; }
-        public string CivilState { get; set; }
 
     }
 }

@@ -5,6 +5,6 @@ namespace ImmobileApp.Aplication.UseCases.Users.Get.Interfaces
 {
     public interface IListUsersWithPaginationUseCase
     {
-        Task<UserPaginatedResponseJson> execute(PaginationParams paginationParams);
+        Task<UserPaginatedResponse> execute(PaginationParams paginationParams);
     }
 }

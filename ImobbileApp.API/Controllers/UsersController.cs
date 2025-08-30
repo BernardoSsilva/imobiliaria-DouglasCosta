@@ -59,7 +59,7 @@ namespace ImmobileApp.API.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(UserPaginatedResponseJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UserPaginatedResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> FetchUsersWithPagination([FromServices] IListUsersWithPaginationUseCase useCase, [FromQuery] PaginationParams pagination)
         {
             var result = await useCase.execute(pagination);
@@ -148,7 +148,7 @@ namespace ImmobileApp.API.Controllers
         public async Task<IActionResult> Login([FromServices] ILoginUseCase useCase, AuthenticationRequestJson request)
         {
             try
-            {
+             {
                 var result = await useCase.execute(request);
                 var token = _tokenGenerator.Generate(result);
 

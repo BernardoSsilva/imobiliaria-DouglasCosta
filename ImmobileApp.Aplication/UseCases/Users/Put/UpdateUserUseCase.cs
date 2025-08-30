@@ -36,7 +36,6 @@ namespace ImmobileApp.Aplication.UseCases.Users.Put
                     Id = userId,
                     UserEmail = body.UserEmail.Length > 0 ? body.UserEmail : user.UserEmail,
                     BornDate = user.BornDate,
-                    CivilState = body.CivilState is null ? user.CivilState : body.CivilState.ToString(),
                     Role = body.Role is null ? user.Role : body.Role.ToString(),
                     Phone = body.Phone.Length > 0 ? body.Phone : user.Phone,
                     UserName = body.UserName.Length > 0 ? body.UserName : user.UserName,

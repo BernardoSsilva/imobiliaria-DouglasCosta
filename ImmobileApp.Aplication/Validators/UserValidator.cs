@@ -14,7 +14,7 @@ namespace ImmobileApp.Aplication.Validators
             RuleFor(u => u.Role).NotEmpty().WithMessage("User role is required");
             RuleFor(u => u.Phone).NotEmpty().WithMessage("User phone is required");
             RuleFor(u => u.BornDate).NotEmpty().WithMessage("User born date is required");
-            RuleFor(u => u.CivilState).NotEmpty().WithMessage("User civil state is required");
+           
         }
     }
 }

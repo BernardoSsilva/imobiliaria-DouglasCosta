@@ -1,12 +1,17 @@
 ﻿using ImmobileApp.Comunication.Requests;
 using ImmobileApp.Domain.Entities;
 using ImmobileApp.Domain.Repositories;
+using ImmobileApp.Domain.Responses.RawResponses;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace ImmobileApp.Infrastructure.Repositories
 {
+  
     public class UserRepository : IUserRepository
     {
+     
 
         private readonly ImmobileAppDbContext _dbContext;
 
@@ -49,10 +54,22 @@ namespace ImmobileApp.Infrastructure.Repositories
             return user;
         }
 
-        public async Task<List<UserEntity>> ListAllUsers(PaginationParams pagination)
+        public async Task<UserPaginatedResponse> ListAllUsers(PaginationParams pagination)
         {
-            var users =await _dbContext.Users.Take(pagination.PerPage).Skip((pagination.Page - 1) * pagination.PerPage).ToListAsync();
-            return users;
+            var totalCount = await _dbContext.Users.CountAsync();
+
+            var users = await _dbContext.Users
+                  .Skip((pagination.Page - 1) * pagination.PerPage)
+                  .Take(pagination.PerPage)
+                  .ToListAsync();
+
+            return new UserPaginatedResponse
+            {
+                PageNumber = (int)Math.Ceiling((decimal)totalCount / pagination.PerPage),
+                PaginationParams = pagination,
+                TotalAmount = totalCount,
+                Users = users,
+            };
         }
 
         public async Task UpdateUser(UserEntity data)

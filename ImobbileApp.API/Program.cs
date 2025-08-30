@@ -69,6 +69,15 @@ builder.Services.AddInfrastructure();
 builder.Services.AddApplication();
 builder.Services.AddSingleton<TokenGenerator>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost5173",
+        policy => policy
+            .WithOrigins("http://localhost:5173") 
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
 
 var app = builder.Build();
 
@@ -79,6 +88,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("AllowLocalhost5173");
 
 app.UseHttpsRedirection();
 

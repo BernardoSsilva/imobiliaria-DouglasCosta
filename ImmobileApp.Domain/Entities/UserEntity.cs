@@ -16,8 +16,6 @@ namespace ImmobileApp.Domain.Entities
         public DateTime BornDate { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        public  string CivilState { get; set; } = string.Empty;
-
 
         public ICollection<ImmobileEntity> Immobiles { get; } = new List<ImmobileEntity>();
 

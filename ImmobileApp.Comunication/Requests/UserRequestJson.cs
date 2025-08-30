@@ -14,7 +14,6 @@ namespace ImmobileApp.Comunication.Requests
         public DateTime? BornDate { get; set; }
 
 
-        public CivilStateEnum? CivilState { get; set; } = CivilStateEnum.SINGLE;
 }
 
    

@@ -1,5 +1,6 @@
 ﻿using ImmobileApp.Comunication.Requests;
 using ImmobileApp.Domain.Entities;
+using ImmobileApp.Domain.Responses.RawResponses;
 
 namespace ImmobileApp.Domain.Repositories
 {
@@ -7,7 +8,7 @@ namespace ImmobileApp.Domain.Repositories
     {
         Task CreateNewUser(UserEntity data);
 
-        Task<List<UserEntity>> ListAllUsers(PaginationParams pagination);
+        Task<UserPaginatedResponse> ListAllUsers(PaginationParams pagination);
 
         Task<UserEntity?> GetUserById(Guid id);
 
