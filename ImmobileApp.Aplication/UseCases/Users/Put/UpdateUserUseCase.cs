@@ -27,7 +27,7 @@ namespace ImmobileApp.Aplication.UseCases.Users.Put
 
             var userWithEmail = await _repository.GetUserByEmail(body.UserEmail);
 
-            if (userWithEmail is not null) throw new ConflictException();
+            if (userWithEmail!= null && userWithEmail.Id != userId) throw new ConflictException();
 
             try
             {
@@ -35,19 +35,11 @@ namespace ImmobileApp.Aplication.UseCases.Users.Put
                 {
                     Id = userId,
                     UserEmail = body.UserEmail.Length > 0 ? body.UserEmail : user.UserEmail,
-                    BornDate = user.BornDate,
+                    BornDate = body.BornDate ?? user.BornDate,
                     Role = body.Role is null ? user.Role : body.Role.ToString(),
                     Phone = body.Phone.Length > 0 ? body.Phone : user.Phone,
                     UserName = body.UserName.Length > 0 ? body.UserName : user.UserName,
                 };
-
-                //var parsedRequest = _mapper.Map<UserRequestJson>(newEntity);
-
-                //Validate(parsedRequest);
-
-                var encriptedPassword = BCrypt.Net.BCrypt.HashPassword(body.Password);
-
-                newEntity.Password = encriptedPassword;
 
 
                 await _repository.UpdateUser(newEntity);

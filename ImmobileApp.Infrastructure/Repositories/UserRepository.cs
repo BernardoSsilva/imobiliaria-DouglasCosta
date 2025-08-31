@@ -28,7 +28,9 @@ namespace ImmobileApp.Infrastructure.Repositories
 
         public async Task DeleteUser(UserEntity data)
         {
-            _dbContext.Remove(data);
+
+            _dbContext.Users.Remove(data);
+
             await _dbContext.SaveChangesAsync();
         }
 
@@ -74,8 +76,13 @@ namespace ImmobileApp.Infrastructure.Repositories
 
         public async Task UpdateUser(UserEntity data)
         {
-            _dbContext.Users.Update(data);
-            await _dbContext.SaveChangesAsync();
+            var userDb = _dbContext.Users.First(x => x.Id == data.Id);
+            userDb.Role = data.Role;
+            userDb.UserName = data.UserName;
+            userDb.UserEmail = data.UserEmail;
+            userDb.BornDate = data.BornDate;
+
+                await _dbContext.SaveChangesAsync();
 
 
         }
