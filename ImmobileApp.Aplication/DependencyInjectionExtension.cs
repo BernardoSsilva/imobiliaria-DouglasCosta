@@ -35,7 +35,10 @@ namespace ImmobileApp.Aplication
 
         public static void AddAutoMapper(IServiceCollection service)
         {
-            service.AddAutoMapper(typeof(AutoMapper));
+            service.AddAutoMapper(cfg =>
+            {
+                cfg.AddProfile<MapperProfile>();
+            }, typeof(MapperProfile).Assembly);
         }
         private static void AddUseCases(IServiceCollection service)
         {

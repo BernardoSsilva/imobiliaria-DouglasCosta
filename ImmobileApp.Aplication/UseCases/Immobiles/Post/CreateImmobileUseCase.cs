@@ -32,8 +32,8 @@ namespace ImmobileApp.Aplication.UseCases.Immobiles.Post
                 LocalLink = request.LocalLink,
                 Neighborhood = request.Neighborhood,
                 PostalCode = request.PostalCode,
-                State = request.State,
-                Status = request.Status.ToString(),
+                State = request.State ?? Comunication.enums.BrazilianState.SC,
+                Value = request.Value ,
                 Street = request.Street,
                 UserCreationId = userId
             };

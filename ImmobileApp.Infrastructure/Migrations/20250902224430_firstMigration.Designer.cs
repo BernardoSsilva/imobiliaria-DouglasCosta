@@ -12,15 +12,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ImmobileApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ImmobileAppDbContext))]
-    [Migration("20250418201754_ChangeImagesTable")]
-    partial class ChangeImagesTable
+    [Migration("20250902224430_firstMigration")]
+    partial class firstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.4")
+                .HasAnnotation("ProductVersion", "9.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -30,6 +30,10 @@ namespace ImmobileApp.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("CloudnaryPublicId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -94,13 +98,8 @@ namespace ImmobileApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("State")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Street")
                         .IsRequired()
@@ -111,6 +110,9 @@ namespace ImmobileApp.Infrastructure.Migrations
 
                     b.Property<Guid>("UserCreationId")
                         .HasColumnType("uuid");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
@@ -127,10 +129,6 @@ namespace ImmobileApp.Infrastructure.Migrations
 
                     b.Property<DateTime>("BornDate")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("CivilState")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");

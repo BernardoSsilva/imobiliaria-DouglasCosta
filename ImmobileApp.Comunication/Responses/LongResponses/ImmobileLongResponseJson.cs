@@ -9,7 +9,7 @@ namespace ImmobileApp.Comunication.Responses.LongResponses
         public ImmobileTypeEnum ImmobileType { get; set; }
 
         public string? LocalLink { get; set; }
-        public ImmobileStatusEnum Status { get; set; }
+        public double Value { get; set; }
 
         public Guid UserCreationId { get; set; }
 
@@ -17,7 +17,7 @@ namespace ImmobileApp.Comunication.Responses.LongResponses
         public DateTime? UpdateDate { get; set; }
 
         public string? PostalCode { get; set; }
-        public string? State { get; set; }
+        public BrazilianState? State { get; set; }
         public string? City { get; set; }
         public string? Street { get; set; }
         public string? Neighborhood { get; set; }

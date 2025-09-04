@@ -1,6 +1,6 @@
 ﻿namespace ImmobileApp.Comunication.enums
 {
-    public enum ImmobileTypeEnum
+    public enum  ImmobileTypeEnum
     {
         LAND,
         HABITATION

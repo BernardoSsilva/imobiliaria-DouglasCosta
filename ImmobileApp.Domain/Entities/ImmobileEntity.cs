@@ -10,7 +10,7 @@ namespace ImmobileApp.Domain.Entities
 
         public string? LocalLink { get; set; } = string.Empty;
 
-        public string Status { get; set; } = ImmobileStatusEnum.INANALYSIS.ToString();
+        public double Value { get; set; } 
 
         public Guid UserCreationId { get; set; }
 
@@ -20,7 +20,7 @@ namespace ImmobileApp.Domain.Entities
 
         public string PostalCode { get; set; } = string.Empty;
 
-        public string State { get; set; } = string.Empty;
+        public BrazilianState State { get; set; } 
 
         public string City { get; set; } = string.Empty;
 

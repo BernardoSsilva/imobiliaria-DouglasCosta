@@ -11,7 +11,7 @@ namespace ImmobileApp.Aplication.Validators
             RuleFor(e => e.HasScripture).NotNull().WithMessage("Immobile scripture status must be provided");
             RuleFor(e => e.ImmobileType).NotNull().WithMessage("Immobile type is required");
             RuleFor(e => e.PostalCode).NotEmpty().WithMessage("Immobile postal code is required");
-            RuleFor(e => e.Status).NotNull().WithMessage("Immobile status is required");
+            RuleFor(e => e.Value).NotNull().WithMessage("Immobile value is required");
         }
     }
 }

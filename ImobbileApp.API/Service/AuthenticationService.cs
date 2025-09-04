@@ -13,39 +13,36 @@ namespace ImmobileApp.API.Service
 
         public Guid userId()
         {
-            // Acessando o cabeçalho de autorização e garantindo que o valor é válido
             var authorizationHeader = _context.Request.Headers["Authorization"].ToString();
 
-            if (string.IsNullOrEmpty(authorizationHeader) || !authorizationHeader.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
+            if (string.IsNullOrEmpty(authorizationHeader))
             {
                 throw new UnauthorizedException();
             }
 
-            // Extraindo o token JWT (removendo "Bearer ")
             var token = authorizationHeader.Substring("Bearer ".Length).Trim();
-
-            // Criando o handler de token JWT
             var tokenHandler = new JwtSecurityTokenHandler();
 
             try
             {
                 var jwtToken = tokenHandler.ReadJwtToken(token);
 
-                // Pegando o valor da claim "sub" (subject) que é o id do usuário
-                var userIdClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == JwtRegisteredClaimNames.Sub);
+                var userIdClaim = jwtToken.Claims
+                    .FirstOrDefault(claim => claim.Type == JwtRegisteredClaimNames.Sub);
 
                 if (userIdClaim == null)
                 {
                     throw new UnauthorizedException();
                 }
 
-                // Retornando o GUID do usuário
-                return new Guid(userIdClaim.Value);
+                return new Guid(userIdClaim.Value); // <- vai te dar o GUID certinho
             }
             catch
             {
                 throw new UnauthorizedException();
             }
+
         }
+
     }
 }

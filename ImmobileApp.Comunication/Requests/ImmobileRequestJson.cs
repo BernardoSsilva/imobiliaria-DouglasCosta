@@ -9,10 +9,10 @@ namespace ImmobileApp.Comunication.Requests
 
         public string? LocalLink { get; set; }
 
-        public ImmobileStatusEnum? Status { get; set; }
+        public double Value { get; set; }
 
         public string? PostalCode { get; set; }
-        public string? State { get; set; }
+        public BrazilianState? State { get; set; }
         public string? City { get; set; }
         public string? Street { get; set; }
         public string? Neighborhood { get; set; }

@@ -20,12 +20,14 @@ namespace ImmobileApp.Aplication.UseCases.Immobiles.Get
         {
             var result = await _repository.ListAllImmobiles(paginationParams);
 
-            var parsedData = _mapper.Map<List<ImmobileShortResponseJson>>(result);
+            var parsedData = _mapper.Map<List<ImmobileShortResponseJson>>(result.immobiles);
 
             return new ImmobilePaginatedResponse
             {
                 immobiles = parsedData,
-                paginationParams = paginationParams
+                paginationParams = paginationParams,
+                PageNumber = result.PageNumber,
+                TotalAmount = result.TotalAmount
             };
         }
     }

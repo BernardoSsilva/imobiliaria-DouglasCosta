@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ImmobileApp.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class recreateDatabase : Migration
+    public partial class firstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,7 @@ namespace ImmobileApp.Infrastructure.Migrations
                     UserName = table.Column<string>(type: "text", nullable: false),
                     UserEmail = table.Column<string>(type: "text", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: false),
-                    Role = table.Column<int>(type: "integer", nullable: false),
+                    Role = table.Column<string>(type: "text", nullable: false),
                     Phone = table.Column<string>(type: "text", nullable: false),
                     BornDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
@@ -37,12 +37,12 @@ namespace ImmobileApp.Infrastructure.Migrations
                     LocalityInfo = table.Column<string>(type: "text", nullable: false),
                     ImmobileType = table.Column<string>(type: "text", nullable: false),
                     LocalLink = table.Column<string>(type: "text", nullable: true),
-                    Status = table.Column<string>(type: "text", nullable: false),
+                    Value = table.Column<double>(type: "double precision", nullable: false),
                     UserCreationId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     PostalCode = table.Column<string>(type: "text", nullable: false),
-                    State = table.Column<string>(type: "text", nullable: false),
+                    State = table.Column<int>(type: "integer", nullable: false),
                     City = table.Column<string>(type: "text", nullable: false),
                     Street = table.Column<string>(type: "text", nullable: false),
                     Neighborhood = table.Column<string>(type: "text", nullable: false),
@@ -66,10 +66,11 @@ namespace ImmobileApp.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Type = table.Column<string>(type: "text", nullable: false),
-                    Image = table.Column<byte>(type: "smallint", nullable: false),
+                    ImageUrl = table.Column<string>(type: "text", nullable: false),
                     Size = table.Column<float>(type: "real", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    ImmobileId = table.Column<Guid>(type: "uuid", nullable: false)
+                    ImmobileId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CloudnaryPublicId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

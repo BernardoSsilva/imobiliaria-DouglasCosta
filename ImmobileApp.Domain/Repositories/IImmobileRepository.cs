@@ -1,5 +1,6 @@
 ﻿using ImmobileApp.Comunication.Requests;
 using ImmobileApp.Domain.Entities;
+using ImmobileApp.Domain.Responses.RawResponses;
 
 namespace ImmobileApp.Domain.Repositories
 {
@@ -7,7 +8,7 @@ namespace ImmobileApp.Domain.Repositories
     {
         Task CreateNewImmobile(ImmobileEntity data);
 
-        Task<List<ImmobileEntity>> ListAllImmobiles(PaginationParams pagination);
+        Task<ImmobilePaginatedResponse> ListAllImmobiles(PaginationParams pagination);
         Task<ImmobileEntity?> GetImmobileById(Guid id);
         Task<ImmobileEntity?> GetImmobileByPostalCode(string PostalCode);
 

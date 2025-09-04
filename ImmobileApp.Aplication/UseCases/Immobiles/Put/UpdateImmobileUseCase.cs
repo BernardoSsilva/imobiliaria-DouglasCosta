@@ -36,16 +36,16 @@ namespace ImmobileApp.Aplication.UseCases.Immobiles.Put
                 Neighborhood = request.Neighborhood ?? immobile.Neighborhood,
                 PostalCode = request.PostalCode ?? immobile.PostalCode,
                 State = request.State ?? immobile.State,
-                Status = request.Status.ToString() ?? immobile.Status,
+                Value = request.Value ,
                 Street = request.Street ?? immobile.Street
             };
 
-            var immobilePostalCodeAlreadyUsed = await this._repository.GetImmobileByPostalCode(request.PostalCode);
+            //var immobilePostalCodeAlreadyUsed = await this._repository.GetImmobileByPostalCode(request.PostalCode);
 
-            if (immobilePostalCodeAlreadyUsed is not null)
-            {
-                throw new ConflictException();
-            }
+            //if (immobilePostalCodeAlreadyUsed is not null)
+            //{
+            //    throw new ConflictException();
+            //}
 
             await _repository.UpdateImmobile(newImmobileData);
         }

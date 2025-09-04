@@ -1,7 +1,9 @@
 ﻿using ImmobileApp.Comunication.Requests;
 using ImmobileApp.Domain.Entities;
 using ImmobileApp.Domain.Repositories;
+using ImmobileApp.Domain.Responses.RawResponses;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace ImmobileApp.Infrastructure.Repositories
 {
@@ -31,15 +33,45 @@ namespace ImmobileApp.Infrastructure.Repositories
             return response;
         }
 
-        public async Task<List<ImmobileEntity>> ListAllImmobiles(PaginationParams pagination)
+        public async Task<ImmobilePaginatedResponse> ListAllImmobiles(PaginationParams pagination)
         {
-            var response = await _dbContext.Immobiles.Take(pagination.PerPage).Skip((pagination.Page - 1) * pagination.PerPage).ToListAsync();
-            return response;
+            var totalCount = await _dbContext.Immobiles.CountAsync();
+
+            var response = await _dbContext.Immobiles.Skip((pagination.Page - 1) * pagination.PerPage).Take(pagination.PerPage).ToListAsync();
+            return new ImmobilePaginatedResponse()
+            {
+                immobiles = response,
+                PageNumber = (int)Math.Ceiling((decimal)totalCount / pagination.PerPage),
+                paginationParams = pagination,
+                TotalAmount = totalCount
+            }
+                ;
         }
 
         public async Task UpdateImmobile(ImmobileEntity data)
         {
-            _dbContext.Immobiles.Update(data);
+            var immobile = await _dbContext.Immobiles.FindAsync(data.Id);
+
+            if (immobile == null)
+            {
+                return;
+            }
+            immobile.Street = data.Street;
+            immobile.LocalLink = data.LocalLink;
+            immobile.City = data.City;
+            immobile.Value = data.Value;
+            immobile.HasScripture = data.HasScripture;
+            immobile.ImmobileDescription = data.ImmobileDescription;
+            immobile.ImmobileType = data.ImmobileType;
+            immobile.LocalityInfo = data.LocalityInfo;
+            immobile.LocalLink = data.LocalLink;
+            immobile.Neighborhood = data.Neighborhood;
+            immobile.PostalCode = data.PostalCode;
+            immobile.State = data.State;
+            immobile.Street = data.Street;
+            immobile.UpdateDate = DateTime.UtcNow;
+            immobile.Value = data.Value;
+
             await _dbContext.SaveChangesAsync();
         }
 

@@ -68,7 +68,7 @@ namespace ImmobileApp.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ImmobileLongResponseJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> FindTaskById([FromHeader] Guid id, [FromServices] IGetImmobileByIdUseCase useCase)
+        public async Task<IActionResult> FindTaskById([FromServices] IGetImmobileByIdUseCase useCase, Guid id)
         {
             try
             {
@@ -93,7 +93,7 @@ namespace ImmobileApp.API.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> EditTask([FromHeader] Guid id, [FromBody] ImmobileRequestJson request, [FromServices] IUpdateImmobileUseCase useCase)
+        public async Task<IActionResult> EditTask( Guid id, [FromBody] ImmobileRequestJson request, [FromServices] IUpdateImmobileUseCase useCase)
         {
             try
             {

@@ -6,9 +6,9 @@ using ImmobileApp.Domain.Entities;
 
 namespace ImmobileApp.Aplication
 {
-    public class AutoMapper : Profile
+    public class MapperProfile : Profile
     {
-        public AutoMapper()
+        public MapperProfile()
         {
             EntityToResponse();
             RequestToEntity();
