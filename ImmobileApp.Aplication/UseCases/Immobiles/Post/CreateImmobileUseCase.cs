@@ -38,12 +38,7 @@ namespace ImmobileApp.Aplication.UseCases.Immobiles.Post
                 UserCreationId = userId
             };
 
-            var immobilePostalCodeAlreadyUsed = await this._repository.GetImmobileByPostalCode(request.PostalCode);
-
-            if (immobilePostalCodeAlreadyUsed is not null)
-            {
-                throw new ConflictException();
-            }
+           
 
             await _repository.CreateNewImmobile(newImmobileEntity);
 
