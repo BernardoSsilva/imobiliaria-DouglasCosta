@@ -3,6 +3,7 @@
     public enum  ImmobileTypeEnum
     {
         LAND,
-        HABITATION
+        HOUSE,
+        APARTMENT
     }
 }
