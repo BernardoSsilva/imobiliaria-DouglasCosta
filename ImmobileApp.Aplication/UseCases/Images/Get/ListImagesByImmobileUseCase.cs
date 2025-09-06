@@ -24,12 +24,12 @@ namespace ImmobileApp.Aplication.UseCases.Images.Get
             _imageRepository = repository;
             _mapper = mapper;
         }
-        public async Task<ImagePaginatedResponse> Execute(PaginationParams paginationParams, Guid immobileId)
+        public async Task<List<ImageShortResponseJson>> Execute( Guid immobileId)
         {
-            List<ImageEnitty> response = await this._imageRepository.ListAllImagesFromImmobile(paginationParams, immobileId);
+            List<ImageEnitty> response = await this._imageRepository.ListAllImagesFromImmobile( immobileId);
             List<ImageShortResponseJson> parsedImages = _mapper.Map<List<ImageShortResponseJson>>(response);
 
-            return new ImagePaginatedResponse { images = parsedImages, paginationParams = paginationParams};
+            return  parsedImages;
         }
     }
 }

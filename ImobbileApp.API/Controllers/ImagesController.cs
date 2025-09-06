@@ -11,11 +11,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ImmobileApp.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ImagesController : ControllerBase
     {
-        [HttpPost("/{immobileId}/create")]
+        [HttpPost("{immobileId}/create")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -47,7 +47,7 @@ namespace ImmobileApp.API.Controllers
             }
         }
 
-        [HttpDelete("/{imageId}/delete")]
+        [HttpDelete("{imageId}/delete")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -129,11 +129,11 @@ namespace ImmobileApp.API.Controllers
 
         [HttpGet("{immobileId}/Images")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> ListImmobileImages(Guid immobileId, [FromQuery] PaginationParams paginationParams, [FromServices] IListImagesByImmobileUseCase useCase)
+        public async Task<IActionResult> ListImmobileImages(Guid immobileId, [FromServices] IListImagesByImmobileUseCase useCase)
         {
             try
             {
-                var result = await useCase.Execute(paginationParams, immobileId);
+                var result = await useCase.Execute( immobileId);
 
                 return Ok(result);
             }catch

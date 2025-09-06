@@ -6,7 +6,7 @@ namespace ImmobileApp.Domain.Repositories
     public interface IImageRepository
     {
         Task CreateImage(ImageEnitty data);
-        Task<List<ImageEnitty>> ListAllImagesFromImmobile(PaginationParams parammeters, Guid immobileId);
+        Task<List<ImageEnitty>> ListAllImagesFromImmobile(Guid immobileId);
         Task<ImageEnitty?> GetImageById(Guid imageId);
         Task DeleteImage(ImageEnitty data);
     }
